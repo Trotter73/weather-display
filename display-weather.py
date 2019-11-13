@@ -44,6 +44,7 @@ def get_weather(api_key, city_id=5327684, units="imperial"):
     if resp:
         forecast = json.loads(resp.content)
     else:
+        print("Failed to get forecast: {} | {}".format(resp.status, resp.content))
         forecast = False
     today = list(filter(lambda l: same_day(l['dt'], tomorrow=False), forecast['list']))
     if len(today) == 0:
@@ -219,16 +220,18 @@ def display_text(TEXT, font=FONT):
 
 def main():
     current, forecast = get_weather(api_key)
+    text = build_text(current, forecast)
     icon = get_icon(forecast['id'])
+    print("Weather is {}, cycling display...".format(text))
     t0 = time.time()
     while True:
         display_icon(icon)
         time.sleep(10)
-        text = build_text(current, forecast)
         display_text(text)
         if time.time() - t0 > 3600 * 2:
             display_icon(icon)
             break
+    print("Finished displaying weather")
 
 
 if __name__ == "__main__":
@@ -236,5 +239,6 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         unicornhathd.off()
+        print("Killed by CTRL-C")
     exit(0)
     
