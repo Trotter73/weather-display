@@ -35,13 +35,12 @@ The following python modules are needed on top of what was required originally..
 
 feedparser <- Grabs the RSS feed and does a lot of the hard work there.
 
-ephem      <- Works out the moon phase for you, could have used it for the sun functions as well but......
-
 portolan   <- Changes degrees to compass points, nicer to read.
 
 
 # Other stuff -
 The script does not always clean up when exiting, especially when being run as a service, not sure why, if you know get in touch, anyway, hatoff.py can be run if you exit and are left with the lights on.
+Moon phase Code by Sean B. Palmer, http://inamidst.com/code/
 
 I found some fonts are hard to read, during my limited messing about I found Roboto-Medium.ttf seemed to be the cleanest.
 
